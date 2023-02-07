@@ -1,0 +1,46 @@
+<div class="fixedHeader">
+    <jhi-alert></jhi-alert>
+
+    <div id="basketIcon">
+        <jhi-basket-icon *ngIf="currentBasket!=null" [basket]="currentBasket"></jhi-basket-icon>
+    </div>
+</div>
+
+<div class="store">
+<h1>
+    <!--<fa-icon icon="store"></fa-icon>-->
+    Liste d'articles
+</h1>
+
+<div class="d-flex justify-content-center" *ngIf="loading">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Chargement en cours...</span>
+    </div>
+</div>
+
+<table *ngIf="!loading" class="table">
+    <tr>
+        <th>Photo</th>
+        <th>Produit</th>
+        <th>Marque</th>
+        <th>Catégories</th>
+        <th>Prix unitaire</th>
+        <th>Code EAN</th>
+        <th></th>
+    </tr>
+
+    <tr *ngFor="let product  of products">
+        <td><img [src]="product.imageUrl" width="80px"></td>
+        <td>{{product.productName}}</td>
+        <td>{{product.brand}}</td>
+        <td>{{product.categories}}</td>
+        <td>{{product.unitPrice}}$</td>
+        <td>{{product.ean13BarCode}}</td>
+        
+        <td ><button title="Add to basket" class="btn btn-primary btn-sm" [id]="'btnAddProduct_'+product.id" 
+            (click)="selectProduct(product)"> Ajouter au panier
+                
+        </button></td>
+    </tr>
+</table>
+</div>

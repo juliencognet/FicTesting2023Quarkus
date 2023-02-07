@@ -1,0 +1,40 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="basket">
+            <h2><span>Basket</span> {{ basket.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Total Price</span></dt>
+                <dd>
+                    <span>{{ basket.totalPrice }}</span>
+                </dd>
+                <dt><span>Creation Date</span></dt>
+                <dd>
+                    <span>{{ basket.creationDate }}</span>
+                </dd>
+                <dt><span>Discount Codes</span></dt>
+                <dd>
+                    <span *ngFor="let discountCodes of basket.discountCodes; let last = last">
+                        <a [routerLink]="['/discount-code', discountCodes?.id, 'view']">{{ discountCodes.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/basket', basket.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

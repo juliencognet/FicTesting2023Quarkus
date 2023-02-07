@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Basket.
+    -->
+    <changeSet id="20230206183853-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="basket_id"
+                                 baseTableName="basket_discount_codes"
+                                 constraintName="fk_basket_discount_codes_basket_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="basket"/>
+
+        <addForeignKeyConstraint baseColumnNames="discount_codes_id"
+                                 baseTableName="basket_discount_codes"
+                                 constraintName="fk_basket_discount_codes_discount_codes_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="discount_code"/>
+        
+    </changeSet>
+</databaseChangeLog>

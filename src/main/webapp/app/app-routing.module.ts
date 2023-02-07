@@ -4,8 +4,10 @@ import { errorRoute } from './layouts/error/error.route';
 import { navbarRoute } from './layouts/navbar/navbar.route';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 import { Authority } from 'app/shared/constants/authority.constants';
+import { ProductBasketComponent } from './product-basket/product-basket.component';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
+import { ProductListComponent } from './product-list/product-list.component';
 
 const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
 
@@ -13,6 +15,8 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
   imports: [
     RouterModule.forRoot(
       [
+        { path: 'productBasket/:basketId', component: ProductBasketComponent },
+        { path: 'productList', component: ProductListComponent },
         {
           path: 'admin',
           data: {

@@ -1,0 +1,5 @@
+set PATH=C:\Program Files\Eclipse Adoptium\jdk-11.0.15.10-hotspot\bin
+set JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-11.0.15.10-hotspot\
+./mvnw
+
+ECHO C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Users\Support\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Git\cmd;C:\dev\software;C:\Program Files\nodejs\;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin;C:\Program Files\Docker\Docker\resources\bin;C:\dev\software\;C:\Users\COGNETJ\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\COGNETJ\AppData\Local\Programs\Python\Python39\;C:\Users\COGNETJ\AppData\Local\Microsoft\WindowsApps;C:\Users\COGNETJ\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\COGNETJ\AppData\Roaming\npm;C:\dev\software\apache-maven-3.8.6\bin;

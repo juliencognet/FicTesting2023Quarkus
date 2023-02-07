@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="productInBasket">
+            <h2><span>Product In Basket</span> {{ productInBasket.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Quantity</span></dt>
+                <dd>
+                    <span>{{ productInBasket.quantity }}</span>
+                </dd>
+                <dt><span>Product</span></dt>
+                <dd>
+                    <div *ngIf="productInBasket.productId">
+                        <a [routerLink]="['/product', productInBasket.productId, 'view']">{{ productInBasket.productId }}</a>
+                    </div>
+                </dd>
+                <dt><span>Basket</span></dt>
+                <dd>
+                    <div *ngIf="productInBasket.basketId">
+                        <a [routerLink]="['/basket', productInBasket.basketId, 'view']">{{ productInBasket.basketId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product-in-basket', productInBasket.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

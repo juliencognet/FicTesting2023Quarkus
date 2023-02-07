@@ -1,0 +1,39 @@
+
+entity Product {
+	productName String required
+    unitPrice Float required
+    ean13BarCode String
+    brand String
+    categories String
+    imageUrl String
+}
+
+entity DiscountCode{
+   code String required
+   discount Float required
+}
+
+entity Basket {
+	totalPrice Float required
+    creationDate LocalDate required
+}
+
+entity ProductInBasket {
+	quantity Integer required
+}
+
+relationship ManyToOne {
+	ProductInBasket{product} to Product
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Basket {products} to ProductInBasket
+}
+
+relationship ManyToMany{
+    Basket {discountCodes} to DiscountCode {baskets}
+}
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct

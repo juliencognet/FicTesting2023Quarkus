@@ -1,0 +1,37 @@
+{
+  "name": "ProductInBasket",
+  "fields": [
+    {
+      "fieldName": "quantity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "product",
+      "otherEntityRelationshipName": "productInBasket",
+      "relationshipName": "product",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "basket",
+      "otherEntityRelationshipName": "products",
+      "relationshipName": "basket",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20230206183953",
+  "entityTableName": "product_in_basket",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Product",
+  "fields": [
+    {
+      "fieldName": "productName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "unitPrice",
+      "fieldType": "Float",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "ean13BarCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "brand",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "categories",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "imageUrl",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [],
+  "changelogDate": "20230206183653",
+  "entityTableName": "product",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

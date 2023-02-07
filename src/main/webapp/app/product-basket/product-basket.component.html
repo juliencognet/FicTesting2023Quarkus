@@ -1,0 +1,75 @@
+<h1>
+    <!--<fa-icon icon="shopping-cart"></fa-icon>-->
+    My shopping cart
+</h1>
+
+<div class="d-flex justify-content-center" *ngIf="loading">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<table *ngIf="!loading" class="table">
+    <tr>
+        <th>Product name</th>
+        <th>Brand</th>
+        <th>Unit price</th>
+        <th>EAN Code</th>
+        <th>Quantity</th>
+        <th>Remove</th>
+    </tr>
+
+    <tr *ngFor="let line of currentBasket.products">
+        <td>{{line.product?.productName}}</td>
+        <td>{{line.product?.brand}}</td>
+        <td>{{line.product?.unitPrice}}$</td>
+        <td>{{line.product?.ean13BarCode}}</td>
+        <td>
+            <!--<fa-icon icon="minus-circle" (click)="removeQuantity(line)" ></fa-icon>-->
+            <a (click)="removeQuantity(line)">-</a>
+            {{line.quantity}}
+            <a (click)="addQuantity(line)">+</a>
+            <!--<fa-icon icon="plus-circle" (click)="addQuantity(line)"></fa-icon>-->
+        </td>
+        <td ><button type="button" class="btn btn-secondary btn-sm" [id]="'btnRemoveProduct_'+line.id" (click)="removeProduct(line)">Remove</button></td>
+    </tr>
+</table>
+<div id="bottomOfPage" *ngIf="!loading">
+<span><!--<fa-icon icon="tags"></fa-icon>-->
+Discount codes:
+</span>
+<span id="discountCodes">
+    <span *ngFor="let discount of currentBasket.discountCodes"><span class="badge badge-pill badge-info">
+        {{discount.code}}
+        </span>
+    </span>
+</span>
+<span>
+    <input id="inputDiscountCode" type="text" [(ngModel)]="discountCode"/>
+    <button id="btnAddDiscountCode" class="btn btn-secondary btn-sm align-bottom" (click)="addDiscountCode()">
+            <!--<fa-icon icon="plus-square" title="Add discount code"></fa-icon>-->
+    </button>
+</span>
+
+<div class="total">
+Total price : <span id="spanTotalPrice" class="totalPrice">{{currentBasket.totalPrice}}</span>$
+</div>
+
+<div id="baskToSearch">
+    <button id="btnBackStore" (click)="backToSearch()" class="btn btn-primary btn-sm">
+       <!-- <fa-icon icon="store"></fa-icon>-->
+        Back to store
+    </button>
+</div>
+
+<div class="alertsAsToast">
+    <jhi-alert></jhi-alert>
+</div>
+
+<div id="pay">
+        <button (click)="pay()" class="btn btn-primary btn-lg btn-block">
+              <!--  <fa-icon icon="cash-register"></fa-icon>-->
+                Proceed to payment
+            </button>
+</div>
+</div>

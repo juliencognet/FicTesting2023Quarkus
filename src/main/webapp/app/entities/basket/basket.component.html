@@ -1,0 +1,69 @@
+<div>
+    <h2 id="page-heading">
+        <span>Baskets</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-basket" [routerLink]="['/basket/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Basket
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="baskets?.length === 0">
+        <span>No baskets found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="baskets && baskets.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>ID</span></th>
+                    <th scope="col" ><span>Total Price</span></th>
+                    <th scope="col" ><span>Creation Date</span></th>
+                    <th scope="col" ><span>Discount Codes</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let basket of baskets ;trackBy: trackId">
+                    <td><a [routerLink]="['/basket', basket.id, 'view']">{{ basket.id }}</a></td>
+                    <td>{{ basket.totalPrice }}</td>
+                    <td>{{ basket.creationDate | date:'mediumDate' }}</td>
+                    <td>
+                        <span *ngFor="let discountCodes of basket.discountCodes; let last = last">
+                            <a class="form-control-static" [routerLink]="['/discount-code', discountCodes?.id, 'view']">{{ discountCodes.id }}</a>{{ last ? '' : ', ' }}
+                        </span>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/basket', basket.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/basket', basket.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(basket)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

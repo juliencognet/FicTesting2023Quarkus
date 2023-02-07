@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="product">
+            <h2><span>Product</span> {{ product.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Product Name</span></dt>
+                <dd>
+                    <span>{{ product.productName }}</span>
+                </dd>
+                <dt><span>Unit Price</span></dt>
+                <dd>
+                    <span>{{ product.unitPrice }}</span>
+                </dd>
+                <dt><span>Ean 13 Bar Code</span></dt>
+                <dd>
+                    <span>{{ product.ean13BarCode }}</span>
+                </dd>
+                <dt><span>Brand</span></dt>
+                <dd>
+                    <span>{{ product.brand }}</span>
+                </dd>
+                <dt><span>Categories</span></dt>
+                <dd>
+                    <span>{{ product.categories }}</span>
+                </dd>
+                <dt><span>Image Url</span></dt>
+                <dd>
+                    <span>{{ product.imageUrl }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/product', product.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
