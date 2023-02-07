@@ -35,7 +35,7 @@ public class BasketResourceTest {
     private static final Float DEFAULT_TOTAL_PRICE = 1F;
     private static final Float UPDATED_TOTAL_PRICE = 2F;
 
-    private static final LocalDate DEFAULT_CREATION_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate DEFAULT_CREATION_DATE = LocalDate.now(ZoneId.systemDefault());
     private static final LocalDate UPDATED_CREATION_DATE = LocalDate.now(ZoneId.systemDefault());
 
 
