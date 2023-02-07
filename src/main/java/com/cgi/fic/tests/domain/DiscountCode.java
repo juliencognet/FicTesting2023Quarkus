@@ -9,6 +9,7 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
@@ -95,6 +96,15 @@ public class DiscountCode extends PanacheEntityBase implements Serializable {
             return discountCode;
         } else {
             return update(discountCode);
+        }
+    }
+
+    public static DiscountCode findByDiscountCode(String discountCode){
+        DiscountCode discountCode1 = find("code", discountCode).firstResult();;
+        if (discountCode1 == null) {
+            throw new NoSuchElementException("Code inconnu");
+        } else {
+            return discountCode1;
         }
     }
 

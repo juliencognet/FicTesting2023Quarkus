@@ -33,7 +33,6 @@ export class BasketService {
   }
 
   addDiscountCode(id: number, discountCode: string): Observable<EntityResponseType> {
-    console.log(`${this.resourceUrl}/${id}/discount/${discountCode}`);
     return this.http
       .put<IBasket>(`${this.resourceUrl}/${id}/discount/${discountCode}`, {}, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));

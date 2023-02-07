@@ -1,6 +1,6 @@
 <h1>
-    <!--<fa-icon icon="shopping-cart"></fa-icon>-->
-    My shopping cart
+    <fa-icon [icon]="faShoppingCart"></fa-icon>
+    Panier d'articles
 </h1>
 
 <div class="d-flex justify-content-center" *ngIf="loading">
@@ -11,12 +11,12 @@
 
 <table *ngIf="!loading" class="table">
     <tr>
-        <th>Product name</th>
-        <th>Brand</th>
-        <th>Unit price</th>
-        <th>EAN Code</th>
-        <th>Quantity</th>
-        <th>Remove</th>
+        <th>Produit</th>
+        <th>Marque</th>
+        <th>Prix Unitaire</th>
+        <th>Code EAN</th>
+        <th>Quantité</th>
+        <th>Supprimer</th>
     </tr>
 
     <tr *ngFor="let line of currentBasket.products">
@@ -25,51 +25,53 @@
         <td>{{line.product?.unitPrice}}$</td>
         <td>{{line.product?.ean13BarCode}}</td>
         <td>
-            <!--<fa-icon icon="minus-circle" (click)="removeQuantity(line)" ></fa-icon>-->
-            <a (click)="removeQuantity(line)">-</a>
+            <button class="btn btn-link" (click)="removeQuantity(line)"><fa-icon [icon]="faMinusCircle" ></fa-icon></button>
             {{line.quantity}}
-            <a (click)="addQuantity(line)">+</a>
-            <!--<fa-icon icon="plus-circle" (click)="addQuantity(line)"></fa-icon>-->
+            <button class="btn btn-link" (click)="addQuantity(line)"><fa-icon [icon]="faPlusCircle"></fa-icon></button>
         </td>
-        <td ><button type="button" class="btn btn-secondary btn-sm" [id]="'btnRemoveProduct_'+line.id" (click)="removeProduct(line)">Remove</button></td>
+        <td ><button type="button" class="btn btn-danger btn-sm" [id]="'btnRemoveProduct_'+line.id" (click)="removeProduct(line)">Supprimer</button></td>
+        
     </tr>
 </table>
 <div id="bottomOfPage" *ngIf="!loading">
-<span><!--<fa-icon icon="tags"></fa-icon>-->
-Discount codes:
-</span>
-<span id="discountCodes">
-    <span *ngFor="let discount of currentBasket.discountCodes"><span class="badge badge-pill badge-info">
-        {{discount.code}}
-        </span>
+    <span><fa-icon [icon]="faTags"></fa-icon>
+    Ajouter des codes de réduction:
     </span>
-</span>
-<span>
-    <input id="inputDiscountCode" type="text" [(ngModel)]="discountCode"/>
-    <button id="btnAddDiscountCode" class="btn btn-secondary btn-sm align-bottom" (click)="addDiscountCode()">
-            <!--<fa-icon icon="plus-square" title="Add discount code"></fa-icon>-->
-    </button>
-</span>
+    <span>
+        <input id="inputDiscountCode" type="text" [(ngModel)]="discountCode"/>
+        <button id="btnAddDiscountCode" class="btn btn-secondary btn-sm align-bottom" (click)="addDiscountCode()">
+                <fa-icon [icon]="faPlusSquare" title="Ajouter un code de réduction"></fa-icon>
+        </button>
+    </span>
+    <span id="discountCodes">
+        
+        <span *ngFor="let discount of currentBasket.discountCodes; let idx = index">
+            <span *ngIf="idx==0"><br/>Codes déjà appliqués: </span>
+            <span class="badge badge-pill badge-info">
+            {{discount.code}}
+            </span>
+        </span>
+    </span>    
 
-<div class="total">
-Total price : <span id="spanTotalPrice" class="totalPrice">{{currentBasket.totalPrice}}</span>$
-</div>
+    <div class="total">
+    Prix total : <span id="spanTotalPrice" class="totalPrice">{{currentBasket.totalPrice}}</span>$
+    </div>
 
-<div id="baskToSearch">
-    <button id="btnBackStore" (click)="backToSearch()" class="btn btn-primary btn-sm">
-       <!-- <fa-icon icon="store"></fa-icon>-->
-        Back to store
-    </button>
-</div>
+    <div id="baskToSearch">
+        <button id="btnBackStore" (click)="backToSearch()" class="btn btn-primary">
+            <fa-icon [icon]="faStore"></fa-icon>
+            Retour au magasin
+        </button>
+    </div>
 
-<div class="alertsAsToast">
-    <jhi-alert></jhi-alert>
-</div>
+    <div class="alertsAsToast">
+        <jhi-alert></jhi-alert>
+    </div>
 
-<div id="pay">
+    <div id="pay">
         <button (click)="pay()" class="btn btn-primary btn-lg btn-block">
-              <!--  <fa-icon icon="cash-register"></fa-icon>-->
-                Proceed to payment
+              <fa-icon [icon]="faCashRegister"></fa-icon>
+                Finaliser ma commande et procéder au paiement
             </button>
-</div>
+    </div>
 </div>

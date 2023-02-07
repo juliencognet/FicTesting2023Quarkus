@@ -77,12 +77,12 @@ public class BasketResource {
         return response.build();
     }
 
-    
+
     @PUT
     @Path("/{id}/discount/{discountCode}")
     public BasketDTO addDiscountCode(@PathParam("id") Long id, @PathParam("discountCode") String discountCode) {
         log.info("REST request to update Basket : {} to add discount code {}", id,discountCode);
-        return basketService.findOne(id).get();
+        return basketService.addDiscountCode(id, discountCode);
     }
 
     /**

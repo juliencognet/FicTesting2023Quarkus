@@ -1,5 +1,5 @@
 <button *ngIf="numberOfProducts>0" type="button" id="btnBasket" class="btn btn-primary" [routerLink]="['/productBasket/',basket.id]">
-  <!--  <fa-icon icon="shopping-cart"></fa-icon>-->
+    <fa-icon [icon]="faShoppingCart"></fa-icon>
     Panier : <span class="badge badge-light" id="badgeNbProductsInBasket">{{numberOfProducts}} product(s)</span>
     <span id="totalPriceOfBasket" class="badge">{{basket?.totalPrice}}$</span>
 </button>

@@ -9,6 +9,7 @@ import { ProductInBasketService } from 'app/entities/product-in-basket/product-i
 import { BasketService } from 'app/entities/basket/basket.service';
 import * as moment from 'moment';
 import { IProduct } from 'app/shared/model/product.model';
+import { faStore, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'jhi-product-list',
@@ -21,6 +22,8 @@ export class ProductListComponent implements OnInit {
   loading = true;
   currentBasket: any;
   basketCreated = false;
+  faStore = faStore;
+  faCartPlus = faCartPlus;
 
   constructor(
     private productService: ProductService,
@@ -65,14 +68,12 @@ export class ProductListComponent implements OnInit {
     basket.creationDate = moment();
     this.basketService.create(basket).subscribe((res: HttpResponse<IBasket>) => {
       this.currentBasket = res.body ? res.body : {};
-      console.log('Created a new empty basket with ID ' + this.currentBasket.id);
     });
   }
 
   refreshBasket(notify = false): void {
     this.basketService.find(this.currentBasket.id).subscribe((res: HttpResponse<IBasket>) => {
       this.currentBasket = res.body ? res.body : {};
-      console.log(this.currentBasket);
       if (notify) {
         this.alertService.success('Nouveau produit ajouté au panier', null);
       }

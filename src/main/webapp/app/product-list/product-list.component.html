@@ -1,5 +1,7 @@
 <div class="fixedHeader">
-    <jhi-alert></jhi-alert>
+    <div class="embedAlert">
+        <div class="alert"><jhi-alert></jhi-alert></div>
+    </div>
 
     <div id="basketIcon">
         <jhi-basket-icon *ngIf="currentBasket!=null" [basket]="currentBasket"></jhi-basket-icon>
@@ -8,7 +10,7 @@
 
 <div class="store">
 <h1>
-    <!--<fa-icon icon="store"></fa-icon>-->
+    <fa-icon [icon]="faStore"></fa-icon>
     Liste d'articles
 </h1>
 
@@ -37,9 +39,8 @@
         <td>{{product.unitPrice}}$</td>
         <td>{{product.ean13BarCode}}</td>
         
-        <td ><button title="Add to basket" class="btn btn-primary btn-sm" [id]="'btnAddProduct_'+product.id" 
-            (click)="selectProduct(product)"> Ajouter au panier
-                
+        <td ><button title="Add to basket" class="btn btn-primary btn-sm" [id]="'btnAddProduct_'+product.id" (click)="selectProduct(product)">
+            <fa-icon [icon]="faCartPlus"></fa-icon>
         </button></td>
     </tr>
 </table>

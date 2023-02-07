@@ -53,7 +53,7 @@ public class DiscountCodeService {
     public Optional<DiscountCodeDTO> findOne(Long id) {
         log.debug("Request to get DiscountCode : {}", id);
         return DiscountCode.findByIdOptional(id)
-            .map(discountCode -> discountCodeMapper.toDto((DiscountCode) discountCode)); 
+            .map(discountCode -> discountCodeMapper.toDto((DiscountCode) discountCode));
     }
 
     /**
@@ -66,6 +66,14 @@ public class DiscountCodeService {
         return discountCodeMapper.toDto(discountCodes);
     }
 
+    /**
+     * Return a discount code by its code nam
+     * @param discountCode discount code
+     * @return discountCodeDTO
+     */
+    public DiscountCodeDTO findByCode(String discountCode){
+        return discountCodeMapper.toDto(DiscountCode.findByDiscountCode(discountCode));
+    }
 
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Basket } from 'app/shared/model/basket.model';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'jhi-basket-icon',
@@ -9,6 +10,7 @@ import { Basket } from 'app/shared/model/basket.model';
 export class BasketIconComponent implements OnInit, OnChanges {
   @Input() basket: Basket = {};
   numberOfProducts = 0;
+  faShoppingCart = faShoppingCart;
 
   constructor() {}
 
@@ -16,8 +18,7 @@ export class BasketIconComponent implements OnInit, OnChanges {
     this.computeNumberOfElements();
   }
 
-  ngOnChanges(changes: import('@angular/core').SimpleChanges): void {
-    console.log(changes);
+  ngOnChanges(): void {
     this.computeNumberOfElements();
   }
 

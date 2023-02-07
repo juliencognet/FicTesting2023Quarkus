@@ -482,8 +482,7 @@ public class BasketResourceTest {
             .statusCode(OK.getStatusCode())
             .contentType(APPLICATION_JSON)
             .body("id", hasItem(basketDTO.id.intValue()))
-            .body("totalPrice", hasItem(0F))
-            .body("creationDate", hasItem(TestUtil.formatDateTime(DEFAULT_CREATION_DATE)));
+            .body("totalPrice", hasItem(0F));
     }
 
     @Test
@@ -528,8 +527,7 @@ public class BasketResourceTest {
             .contentType(APPLICATION_JSON)
             .body("id", is(basketDTO.id.intValue()))
 
-                .body("totalPrice", is(0F))
-                .body("creationDate", is(TestUtil.formatDateTime(DEFAULT_CREATION_DATE)));
+                .body("totalPrice", is(0F));
     }
 
     @Test

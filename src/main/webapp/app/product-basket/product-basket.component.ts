@@ -6,6 +6,15 @@ import { BasketService } from 'app/entities/basket/basket.service';
 import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JhiAlertService, JhiAlert } from 'ng-jhipster';
+import {
+  faShoppingCart,
+  faStore,
+  faCashRegister,
+  faPlusSquare,
+  faTags,
+  faPlusCircle,
+  faMinusCircle,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'jhi-product-basket',
@@ -18,6 +27,13 @@ export class ProductBasketComponent implements OnInit {
   loading = false;
   alerts: JhiAlert[] = [];
   discountCode = '';
+  faShoppingCart = faShoppingCart;
+  faStore = faStore;
+  faCashRegister = faCashRegister;
+  faPlusSquare = faPlusSquare;
+  faTags = faTags;
+  faPlusCircle = faPlusCircle;
+  faMinusCircle = faMinusCircle;
 
   constructor(
     private basketService: BasketService,
@@ -33,7 +49,6 @@ export class ProductBasketComponent implements OnInit {
   }
 
   loadBasket(basketId: number): void {
-    console.log('loading basket ' + basketId);
     this.loading = true;
     this.basketService.find(basketId).subscribe((res: HttpResponse<IBasket>) => {
       this.currentBasket = res.body ? res.body : {};
@@ -54,22 +69,20 @@ export class ProductBasketComponent implements OnInit {
 
   addDiscountCode(): void {
     this.loading = true;
-    this.basketService.addDiscountCode(this.currentBasket.id ? this.currentBasket.id : 0, this.discountCode).subscribe(
-      res => {
-        this.currentBasket = res.body ? res.body : {};
-        this.loading = false;
+    const basketId = this.currentBasket.id ? this.currentBasket.id : 0;
+    this.basketService.addDiscountCode(basketId, this.discountCode).subscribe(
+      () => {
         this.discountCode = '';
+        this.loadBasket(basketId);
       },
-      err => {
-        this.alertService.error('Discount code not existing', null);
-        console.log(err);
+      () => {
+        this.alertService.error('Code de réduction invalide', null);
         this.loading = false;
       }
     );
   }
 
   updateLineAndReload(line: IProductInBasket): void {
-    console.log(line);
     const currentBasketId = this.currentBasket.id ? this.currentBasket.id : 0;
     line.basketId = currentBasketId;
     if (line.product !== undefined) {
@@ -94,6 +107,6 @@ export class ProductBasketComponent implements OnInit {
   }
 
   pay(): void {
-    this.alertService.error('Proceed to payment is not yet implemented', null);
+    this.alertService.error('Fonctionnalité non implémentée hors scope du TP.', null);
   }
 }

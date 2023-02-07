@@ -1,11 +1,11 @@
 package com.cgi.fic.tests.service;
 
 import com.cgi.fic.tests.domain.Basket;
+import com.cgi.fic.tests.domain.DiscountCode;
 import com.cgi.fic.tests.service.dto.BasketDTO;
+import com.cgi.fic.tests.service.dto.DiscountCodeDTO;
 import com.cgi.fic.tests.service.mapper.BasketMapper;
-import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
-import org.hibernate.dialect.function.StandardAnsiSqlAggregationFunctions.SumFunction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,13 +15,15 @@ import javax.transaction.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BinaryOperator;
 
 @ApplicationScoped
 @Transactional
 public class BasketService {
 
     private final Logger log = LoggerFactory.getLogger(BasketService.class);
+
+    @Inject
+    DiscountCodeService discountCodeService;
 
     @Inject
     BasketMapper basketMapper;
@@ -46,6 +48,14 @@ public class BasketService {
         Basket.findByIdOptional(id).ifPresent(basket -> {
             basket.delete();
         });
+    }
+
+    @Transactional
+    public BasketDTO addDiscountCode(Long basketId, String discountCode) {
+        BasketDTO basketDTO = findOne(basketId).get();
+        DiscountCodeDTO discount = discountCodeService.findByCode(discountCode);
+        basketDTO.discountCodes.add(discount);
+        return persistOrUpdate(basketDTO);
     }
 
     /**
