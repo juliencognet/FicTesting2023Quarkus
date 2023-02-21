@@ -36,7 +36,8 @@ module.exports = (options) => webpackMerge(commonConfig({ env: ENV }), {
             ignored: /node_modules/
         },
         https: options.tls,
-        historyApiFallback: true
+        historyApiFallback: true,
+        allowedHosts: "all"
     },
     entry: {
         global: './src/main/webapp/content/scss/global.scss',
