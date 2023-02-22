@@ -31,6 +31,8 @@ public class ProductInBasketResourceTest {
 
     private static final Integer DEFAULT_QUANTITY = 1;
     private static final Integer UPDATED_QUANTITY = 2;
+    private static final Long DEFAULT_PRODUCTID = 1L;
+    private static final Long DEFAULT_BASKETID = 1L;
 
 
 
@@ -74,6 +76,8 @@ public class ProductInBasketResourceTest {
     public static ProductInBasketDTO createEntity() {
         var productInBasketDTO = new ProductInBasketDTO();
         productInBasketDTO.quantity = DEFAULT_QUANTITY;
+        productInBasketDTO.productId = DEFAULT_PRODUCTID;
+        productInBasketDTO.basketId = DEFAULT_BASKETID;
         return productInBasketDTO;
     }
 

@@ -86,6 +86,13 @@ Naviguez dans l'application, essayez toutes les fonctionnalités et procédez à
 
 Nous proposons de corriger l'anomalie que vous avez dû détecter lors de l'ajout d'un produit dans le panier.
 
+Pour bien comprendre le problème, nous vous invitons à vous connecter en "admin" dans l'application web et visualiser l'état en base de données. Regardez en particulier l'entité "Product In Basket". Que constatez-vous ?
+
+>    <details>
+>    <summary>Solution</summary>
+>    Lorsqu'on ajoute 2 fois le même produit à un panier, l'application crée 2 lignes plutôt que modifier la quantité du produit dans le panier existant.
+>    </details>
+
 > Comment allez-vous procéder ? Quelle méthodologie voulez-vous adopter ?
 >
 >    <details>
@@ -102,7 +109,47 @@ Nous vous proposons désormais d'analyser le code correspondant à cette anomali
 >    La méthode web.rest.ProductInBasketResource.createProductInBasket appelle la méthode service.ProductInBasketService.save qui appelle repository.productInBasketRepository.persistOrUpdate
 >    </details>
 
-Après analyse, pensez-vous que l'organisation du code actuelle vous permet-elle d'implémenter ce nouveau contrôle de façon adéquate.
+Retrouvez désormais le test associé à cette méthode. Il faut le chercher dans `src/test/java`.
+
+>    <details>
+>    <summary>Solution</summary>
+>    Les tests de la classe web.rest.ProductInBasketResource se trouvent dans src/test/java/com/cgi/fic/tests/web/rest/ProductInBasketResourceTest.java.
+>    </details>
+
+Exécutez ces tests. Pour cela, il y a 2 façons de le faire:
+
+- Cliquer sur le bouton "Run test" localisé à gauche du titre de la classe `public class ProductInBasketResourceTest {`
+- Aller dans le plugin "Testing" (icone becher à gauche) et exécuter les tests de la classe en question.
+
+Ces tests sont-ils suffisants ?
+Quel test rajouter ? Comment voulez-vous le nommer ?
+
+>    <details>
+>    <summary>Solution</summary>
+>    `public void givenOneEmptyBasketWhenIAddTwoTimesTheSameProductThenBasketShouldContainOnlyOneRowWithAQuantityOfTwo() { }`
+>    </details>
+
+Attention, y a t il seulement un seul test à créer ? Regardez en particulier les 3 attributs obligatoires de la classe ProductInBasket. Vous en déduirez au moins 2 autres tests à créer.
+
+>    <details>
+>    <summary>Solution</summary>
+> givenTwoEmptyBasketsWhenIAddTheSameProductToBothBasketsThenTheTwoBasketsShouldContainOnlyOneRowWithAQuantityOfOne ET givenOneEmptyBasketWhenIAddTwoDifferentProductsInBasketThenTheBasketsShouldContainTwoRowsForTheTwoProductsWithAQuantityOfOne
+>    </details>
+
+Pour implémenter ces 3 tests, inspirez-vous de la méthode createProductInBasket().
+
+Exécutez vos nouveaux tests. Que constatez-vous ?
+
+>    <details>
+>    <summary>Solution</summary>
+> Les tests échouent. Bravo, vous avez réussi la première phase du TDD : écrire des tests qui échouent car le code n'est pas encore implémenté.
+>    </details>
+
+Corrigez désormais la classe incriminée.
+
+### 3.3. Correction de l'anomalie
+
+Après analyse, pensez-vous que l'organisation du code actuelle vous permet d'implémenter ce nouveau contrôle de façon adéquate ?
 
 > Quelle réorganisation (refactoring) proposez-vous ?
 >
@@ -111,176 +158,13 @@ Après analyse, pensez-vous que l'organisation du code actuelle vous permet-elle
 >     Implémenter une nouvelle méthode addProductToBasket dans la classe de service (ProductInBasketService). Cette méthode procède au contrôles fonctionnels (dont le contrôle de doublon) et appelle la méthode save de ce même service. Dans la classe rest, il faudra donc appeler la méthode addProductToBasket du service.
 >    </details>
 
-Commencez par développer les tests nécessaires
+### 3.4. Maintenabilité des tests créés
 
-## Remarques pour les éventuels mainteneurs du TP
+Que pensez-vous de la maintenabilité des tests que vous venez de créer ?
 
-This application was generated using JHipster 6.10.5 and JHipster Quarkus 1.1.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.10.5](https://www.jhipster.tech/documentation-archive/v6.10.5).
+>    <details>
+>    <summary>Solution</summary>
+>  Vous venez de faire du copier / coller. Les tests deviennent difficiles à maintenir. C'est là qu'il convient de faire du test paramétré. C'est-à-dire faire en sorte de passer en paramètre du test les identifiants de panier et les identifiants de produits qui seront rajoutés au panier ainsi que les résultats attendus.
+>    </details>
 
-Before you can build this project, you must install and configure the following dependencies on your machine:
-
-1. [Node.js][]: We use Node to run a development web server and build the project.
-   Depending on your system, you can install Node either from source or as a pre-packaged bundle.
-
-After installing Node, you should be able to run the following command to install development tools.
-You will only need to run this command when dependencies change in [package.json](package.json).
-
-    npm install
-
-We use npm scripts and [Webpack][] as our build system.
-
-Run the following commands in two separate terminals to create a blissful development experience where your browser
-auto-refreshes when files change on your hard drive.
-
-    ./mvnw
-    npm start
-
-Npm is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
-specifying a newer version in [package.json](package.json). You can also run `npm update` and `npm install` to manage dependencies.
-Add the `help` flag on any command to see how you can use it. For example, `npm help update`.
-
-The `npm run` command will list all of the scripts available to run for this project.
-
-### PWA Support
-
-JHipster ships with PWA (Progressive Web App) support, and it's turned off by default. One of the main components of a PWA is a service worker.
-
-The service worker initialization code is commented out by default. To enable it, uncomment the following code in `src/main/webapp/index.html`:
-
-```html
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js').then(function () {
-      console.log('Service Worker Registered');
-    });
-  }
-</script>
-```
-
-Note: [Workbox](https://developers.google.com/web/tools/workbox/) powers JHipster's service worker. It dynamically generates the `service-worker.js` file.
-
-### Managing dependencies
-
-For example, to add [Leaflet][] library as a runtime dependency of your application, you would run following command:
-
-    npm install --save --save-exact leaflet
-
-To benefit from TypeScript type definitions from [DefinitelyTyped][] repository in development, you would run following command:
-
-    npm install --save-dev --save-exact @types/leaflet
-
-Then you would import the JS and CSS files specified in library's installation instructions so that [Webpack][] knows about them:
-Edit [src/main/webapp/app/vendor.ts](src/main/webapp/app/vendor.ts) file:
-
-```
-import 'leaflet/dist/leaflet.js';
-```
-
-Edit [src/main/webapp/content/scss/vendor.scss](src/main/webapp/content/scss/vendor.scss) file:
-
-```
-@import '~leaflet/dist/leaflet.css';
-```
-
-Note: There are still a few other things remaining to do for Leaflet that we won't detail here.
-
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
-
-### Using Angular CLI
-
-You can also use [Angular CLI][] to generate some custom client code.
-
-For example, the following command:
-
-    ng generate component my-component
-
-will generate few files:
-
-    create src/main/webapp/app/my-component/my-component.component.html
-    create src/main/webapp/app/my-component/my-component.component.ts
-    update src/main/webapp/app/app.module.ts
-
-## Building for production
-
-### Packaging as thin jar
-
-To build the final jar and optimize the FIC_Tests_2023 application for production, run:
-
-```
-./mvnw -Pprod clean package
-```
-
-This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
-To ensure everything worked, run:
-
-    java -jar target/quarkus-app/*.jar
-
-Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
-
-Refer to [Using JHipster in production][] for more details.
-
-### Packaging as native executable
-
-_Targeting your Operation System_
-In order to build a native image locally, your need to have [GraalVM](https://www.graalvm.org/) installed and `GRAALVM_HOME` defined.
-You can use the `native` profile as follow to build native executable.
-
-```
-./mvnw package -Pnative
-```
-
-Keep in mind that the generated native executable is dependent on your Operating System.
-
-_Targeting a container environment_
-If you plan to run your application in a container, run:
-
-```
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-It will use a Docker container with GraalVM installed and produce an 64 bit Linux executable.
-
-## Testing
-
-To launch your application's tests, run:
-
-    ./mvnw verify
-
-### Client tests
-
-Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in [src/test/javascript/](src/test/javascript/) and can be run with:
-
-    npm test
-
-For more information, refer to the [Running tests page][].
-
-## Using Docker to simplify development (optional)
-
-You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
-
-For example, to start a postgresql database in a docker container, run:
-
-    docker-compose -f src/main/docker/postgresql.yml up -d
-
-To stop it and remove the container, run:
-
-    docker-compose -f src/main/docker/postgresql.yml down
-
-[jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 6.10.5 archive]: https://www.jhipster.tech/documentation-archive/v6.10.5
-[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.10.5/development/
-[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v6.10.5/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.10.5/production/
-[running tests page]: https://www.jhipster.tech/documentation-archive/v6.10.5/running-tests/
-[code quality page]: https://www.jhipster.tech/documentation-archive/v6.10.5/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v6.10.5/setting-up-ci/
-[node.js]: https://nodejs.org/
-[yarn]: https://yarnpkg.org/
-[webpack]: https://webpack.github.io/
-[angular cli]: https://cli.angular.io/
-[browsersync]: https://www.browsersync.io/
-[jest]: https://facebook.github.io/jest/
-[jasmine]: https://jasmine.github.io/2.0/introduction.html
-[protractor]: https://angular.github.io/protractor/
-[leaflet]: https://leafletjs.com/
-[definitelytyped]: https://definitelytyped.org/
+## 4. Implémentations de tests de type Behavior Driven Development avec Cucumber
