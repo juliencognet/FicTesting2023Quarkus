@@ -32,9 +32,6 @@ public class ProductInBasketResourceTest {
     private static final Integer DEFAULT_QUANTITY = 1;
     private static final Integer UPDATED_QUANTITY = 2;
     private static final Long DEFAULT_PRODUCTID = 1L;
-    private static final Long DEFAULT_BASKETID = 1L;
-
-
 
     String adminToken;
 
@@ -44,9 +41,9 @@ public class ProductInBasketResourceTest {
     LiquibaseFactory liquibaseFactory;
 
     @BeforeAll
-    static void jsonMapper() {
+    static void beforeAllTests() {
         RestAssured.config =
-            RestAssured.config().objectMapperConfig(objectMapperConfig().defaultObjectMapper(TestUtil.jsonbObjectMapper()));
+            RestAssured.config().objectMapperConfig(objectMapperConfig().defaultObjectMapper(TestUtil.jsonbObjectMapper()));            
     }
 
     @BeforeEach
@@ -77,7 +74,7 @@ public class ProductInBasketResourceTest {
         var productInBasketDTO = new ProductInBasketDTO();
         productInBasketDTO.quantity = DEFAULT_QUANTITY;
         productInBasketDTO.productId = DEFAULT_PRODUCTID;
-        productInBasketDTO.basketId = DEFAULT_BASKETID;
+        productInBasketDTO.basketId = 1L;
         return productInBasketDTO;
     }
 
@@ -88,7 +85,7 @@ public class ProductInBasketResourceTest {
 
     @Test
     public void createProductInBasket() {
-        var databaseSizeBeforeCreate = given()
+        int databaseSizeBeforeCreate = given()
             .auth()
             .preemptive()
             .oauth2(adminToken)

@@ -158,6 +158,8 @@ Après analyse, pensez-vous que l'organisation du code actuelle vous permet d'im
 >     Implémenter une nouvelle méthode addProductToBasket dans la classe de service (ProductInBasketService). Cette méthode procède au contrôles fonctionnels (dont le contrôle de doublon) et appelle la méthode save de ce même service. Dans la classe rest, il faudra donc appeler la méthode addProductToBasket du service.
 >    </details>
 
+Une fois le code corrigé, vous pouvez alors relancer les tests. Ils passent tous au vert et vous venez de réussir votre refactoring.
+
 ### 3.4. Maintenabilité des tests créés
 
 Que pensez-vous de la maintenabilité des tests que vous venez de créer ?
@@ -167,4 +169,32 @@ Que pensez-vous de la maintenabilité des tests que vous venez de créer ?
 >  Vous venez de faire du copier / coller. Les tests deviennent difficiles à maintenir. C'est là qu'il convient de faire du test paramétré. C'est-à-dire faire en sorte de passer en paramètre du test les identifiants de panier et les identifiants de produits qui seront rajoutés au panier ainsi que les résultats attendus.
 >    </details>
 
-## 4. Implémentations de tests de type Behavior Driven Development avec Cucumber
+## 4. Bouchons
+
+Quelle est la nature du test que vous venez d'implémenter ?
+
+>    <details>
+>    <summary>Solution</summary>
+>  Ce test est un test d'intégration qui a besoin de la base de données et des services pour fonctionner.
+>    </details>
+
+Transformer ce test en un test unitaire qui respectera les critères RIP. Pour cela, vous aurez besoin de rajouter une librairie de mock dans votre projet.
+
+Quels constats faites-vous sur les différents aspects suivants:
+
+- rapidité du test
+- maintenabilité du test
+- pertinence fonctionnelle
+
+## 5. Pour aller plus loin
+
+Utiliser les outils de développements de Chrome ou Firefox pour évaluer votre site sur la base de différents critères non fonctionnels:
+
+- performance réseau (tester le comportement du site en 3G)
+- affichage du site sur différents terminaux (tester la responsivité - responsiveness)
+- accessibilité du site
+- éco-index de l'application (via utilisation des plugins GreenIT-Analysis et Lighthouse)
+
+## 6. Pour aller encore plus loin
+
+Appliquer la même méthodologie pour corriger le calcul des promotions.
