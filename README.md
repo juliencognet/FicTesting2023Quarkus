@@ -82,6 +82,37 @@ Naviguez dans l'application, essayez toutes les fonctionnalités et procédez à
 >    Le calcul du panier ne prend pas en compte les bons de réduction qui sont ajoutés sur le panier.
 >    </details>
 
+### 3.2. Correction de l'anomalie de mise en panier d'un produit
+
+Nous proposons de corriger l'anomalie que vous avez dû détecter lors de l'ajout d'un produit dans le panier.
+
+> Comment allez-vous procéder ? Quelle méthodologie voulez-vous adopter ?
+>
+>    <details>
+>    <summary>Solution</summary>
+>    Le Test Driven Development est particulièrement adapté à la prise en compte d'anomalies puisqu'il sécurise le développement existant et s'assure que l'anomalie ne sera pas reproduite à l'avenir (non-régression)
+>    </details>
+
+Nous vous proposons désormais d'analyser le code correspondant à cette anomalie.
+
+> Quelles sont les méthodes concernées ? Aidez-vous des outils de développements de votre navigateur (touche F12) pour retrouver l'appel REST qui est réalisé. Ensuite, dirigez-vous vers le package `com.cgi.fic.tests.web.rest`.
+>
+>    <details>
+>    <summary>Solution</summary>
+>    La méthode web.rest.ProductInBasketResource.createProductInBasket appelle la méthode service.ProductInBasketService.save qui appelle repository.productInBasketRepository.persistOrUpdate
+>    </details>
+
+Après analyse, pensez-vous que l'organisation du code actuelle vous permet-elle d'implémenter ce nouveau contrôle de façon adéquate.
+
+> Quelle réorganisation (refactoring) proposez-vous ?
+>
+>    <details>
+>    <summary>Solution</summary>
+>     Implémenter une nouvelle méthode addProductToBasket dans la classe de service (ProductInBasketService). Cette méthode procède au contrôles fonctionnels (dont le contrôle de doublon) et appelle la méthode save de ce même service. Dans la classe rest, il faudra donc appeler la méthode addProductToBasket du service.
+>    </details>
+
+Commencez par développer les tests nécessaires
+
 ## Remarques pour les éventuels mainteneurs du TP
 
 This application was generated using JHipster 6.10.5 and JHipster Quarkus 1.1.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.10.5](https://www.jhipster.tech/documentation-archive/v6.10.5).
