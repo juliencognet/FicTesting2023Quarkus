@@ -70,7 +70,23 @@ A gauche de votre IDE, la dernière icone se présente sous la forme d'un béche
 
 ## 3. Exercices
 
-### 3.1. Tests exploratoires
+### 3.1. Saisie et exécution de tests manuels
+
+Votre première tâche consiste à identifier les cas de test de l'application.
+
+Vous devez utiliser pour cela l'outil SquashTM disponible à l'adresse suivante :
+
+http://squashtm-fictesting.francecentral.azurecontainer.io:8080/squash
+
+Les logins vous seront fournis par vos formateurs.
+
+Dans squash, il vous faudra:
+
+- saisir les exigences (une par fonctionnalité - cases bleues et orange du processus métier)
+- saisir des tests et étapes de tests
+- organiser vos tests en différents dossiers
+
+### 3.2. Tests exploratoires
 
 Naviguez dans l'application, essayez toutes les fonctionnalités et procédez à des tests exploratoires.
 
@@ -82,7 +98,9 @@ Naviguez dans l'application, essayez toutes les fonctionnalités et procédez à
 >    Le calcul du panier ne prend pas en compte les bons de réduction qui sont ajoutés sur le panier.
 >    </details>
 
-### 3.2. Correction de l'anomalie de mise en panier d'un produit
+Complétez squash avec les tests et étapes de tests requis. Lancez une campagne de test dans squash, exécutez les tests et notez ces 2 tests comme étant en échec.
+
+### 3.3. Correction de l'anomalie de mise en panier d'un produit
 
 Nous proposons de corriger l'anomalie que vous avez dû détecter lors de l'ajout d'un produit dans le panier.
 
@@ -147,7 +165,7 @@ Exécutez vos nouveaux tests. Que constatez-vous ?
 
 Corrigez désormais la classe incriminée.
 
-### 3.3. Correction de l'anomalie
+### 3.4. Correction de l'anomalie
 
 Après analyse, pensez-vous que l'organisation du code actuelle vous permet d'implémenter ce nouveau contrôle de façon adéquate ?
 
@@ -160,7 +178,7 @@ Après analyse, pensez-vous que l'organisation du code actuelle vous permet d'im
 
 Une fois le code corrigé, vous pouvez alors relancer les tests. Ils passent tous au vert et vous venez de réussir votre refactoring.
 
-### 3.4. Maintenabilité des tests créés
+### 3.5. Maintenabilité des tests créés
 
 Que pensez-vous de la maintenabilité des tests que vous venez de créer ?
 

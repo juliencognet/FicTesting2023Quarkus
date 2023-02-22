@@ -32,7 +32,6 @@ public class Basket extends PanacheEntityBase implements Serializable {
     @Column(name = "total_price", nullable = false)
     public Float totalPrice;
 
-    @NotNull
     @Column(name = "creation_date", nullable = false)
     public LocalDate creationDate;
 
