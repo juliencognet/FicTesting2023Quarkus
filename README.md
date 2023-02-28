@@ -81,10 +81,9 @@ http://squashtm-fictesting.francecentral.azurecontainer.io:8080/squash
 Les logins vous seront fournis par vos formateurs.
 
 Dans squash, il vous faudra:
+- saisir une exigence (une par fonctionnalité - cases bleues et orange du processus métier)
+- saisir un cas de tests et les étapes de tests associées
 
-- saisir les exigences (une par fonctionnalité - cases bleues et orange du processus métier)
-- saisir des tests et étapes de tests
-- organiser vos tests en différents dossiers
 
 ### 3.2. Tests exploratoires
 
@@ -98,7 +97,7 @@ Naviguez dans l'application, essayez toutes les fonctionnalités et procédez à
 >    Le calcul du panier ne prend pas en compte les bons de réduction qui sont ajoutés sur le panier.
 >    </details>
 
-Complétez squash avec les tests et étapes de tests requis. Lancez une campagne de test dans squash, exécutez les tests et notez ces 2 tests comme étant en échec.
+Pour les plus fonctionnels d'entre-vous, nous vous invitons à compléter squash avec les tests et étapes de tests associées. Lancez une campagne de test dans squash, exécutez les tests et notez ces 2 tests comme étant en échec.
 
 ### 3.3. Correction de l'anomalie de mise en panier d'un produit
 
